@@ -2,19 +2,18 @@ const express = require('express');
 var mcuRouter = express.Router();
 const bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
-const modelHelper = require('../helpers/modelHelper');
-const McuSchema = require('../schemas/McuSchema');
-var character = modelHelper.createModel('character', McuSchema);
+var McuController = require('../controllers/McuController');
 
 mcuRouter.get('/all', function(req, res){
-  character.find().then(function(response){
-    res.send(response);
+  McuController.getAllCharacters().then(function(result){
+    res.send(result);
   }).catch(function(err){
     console.log(err);
-    res.status(500);
     res.end();
   });
 });
+
+
 
 mcuRouter.post('/character', jsonParser, function(req, res){
   res.send(`${req.body.name} --> ${req.body.alias}`);
