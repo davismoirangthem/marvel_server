@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var character = new mongoose.Schema({
+  id: Number,
   name: String,
   alias: String,
   played_by: String,
@@ -14,8 +15,14 @@ var character = new mongoose.Schema({
   ]
 });
 
+var id = new mongoose.Schema({
+  collection_name: String,
+  last_id: Number
+});
+
 var McuSchema = {
-  character
+  character,
+  id
 };
 
 module.exports = McuSchema;
