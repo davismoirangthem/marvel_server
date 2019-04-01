@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 3005;
+const cors = require('cors');
 const mongoose = require('mongoose');
 var mcuRouter = require('./routers/McuRouter');
 mongoose.connect('mongodb://localhost/marvel',{ useNewUrlParser: true });
 mongoose.Promise = Promise;
 var db = mongoose.connection;
+
+app.use(cors());
 
 db.on('error', function(){
   console.log('Cannot connect to Mongo');
