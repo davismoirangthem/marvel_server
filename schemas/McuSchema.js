@@ -1,21 +1,33 @@
 const mongoose = require('mongoose');
 
 var character = new mongoose.Schema({
+  id: Number,
   name: String,
   alias: String,
-  played_by: String,
-  first_appeared_in: String,
+  playedBy: String,
+  actorImdbLink: String,
+  firstAppearedIn: String,
+  imageUrl: String,
+  description: String,
+  marvelUrl: String,
   movies: [
     {
       name: String,
       year: Number,
-      appearance_type: String
+      appearanceType: String,
+      imdbLink: String
     }
   ]
 });
 
+var id = new mongoose.Schema({
+  collectionName: String,
+  lastId: Number
+});
+
 var McuSchema = {
-  character
+  character,
+  id
 };
 
 module.exports = McuSchema;
