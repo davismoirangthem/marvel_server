@@ -102,4 +102,24 @@ mcuRouter.get('/character/search', function(req, res){
   });
 });
 
+mcuRouter.post('/keyword', jsonParser, function(req, res){
+  if(!req.body){
+    res.status(400);
+    res.send("Invalid Request Body");
+  }
+  McuController.addKeyword(req.body).then(function(result){
+    if(result){
+      let response = responseHelper.createResponse(result, true, null);
+      res.json(response);
+    }
+    else{
+      res.json(result);
+    }
+  }).catch(function(err){
+    let response = responseHelper.createResponse("Server Error", false, err);
+    res.status(500);
+    res.json(response);
+  });
+});
+
 module.exports = mcuRouter;

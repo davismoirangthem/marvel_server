@@ -25,9 +25,15 @@ var id = new mongoose.Schema({
   lastId: Number
 });
 
+var keyword = new mongoose.Schema({
+  id: Number,
+  name: String
+});
+
 var McuSchema = {
   character,
-  id
+  id,
+  keyword
 };
 
 module.exports = McuSchema;

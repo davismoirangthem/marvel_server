@@ -2,6 +2,7 @@ const modelHelper = require('../helpers/modelHelper');
 const McuSchema = require('../schemas/McuSchema');
 const Character = modelHelper.createModel('character', McuSchema.character);
 const id = modelHelper.createModel('id', McuSchema.id);
+const Keyword = modelHelper.createModel('keyword', McuSchema.keyword);
 
 var getNewId = async function(collectionName){
   let response = await id.findOne({ collectionName: collectionName });
@@ -50,7 +51,22 @@ var getCharacterById = async function(id){
 var searchCharacter = async function(searchString){
   let response = await Character.find({name: { $regex: `${searchString}`, $options: 'i' } },{ name: 1, id: 1 });
   return response;
-}
+};
+
+var addKeyword = async function(keywordArray){
+  let response = false;
+  try{
+    keywordArray.forEach(function(keyword){
+      let newKeyword = new Keyword(keyword);
+      newKeyword.save(newKeyword);
+      response = true;
+    });
+  }
+  catch{
+    response = false;
+  }
+  return response;
+};
 
 const McuController = {
   getNewId,
@@ -59,7 +75,8 @@ const McuController = {
   addMultipleCharacters,
   getAllCharacters,
   getCharacterById,
-  searchCharacter
+  searchCharacter,
+  addKeyword
 };
 
 module.exports = McuController;
