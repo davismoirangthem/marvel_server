@@ -4,7 +4,7 @@ const port = 3005;
 const cors = require('cors');
 const mongoose = require('mongoose');
 var mcuRouter = require('./routers/McuRouter');
-mongoose.connect('mongodb://localhost/marvel',{ useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1/marvel',{ useNewUrlParser: true });
 mongoose.Promise = Promise;
 var db = mongoose.connection;
 
